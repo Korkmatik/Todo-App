@@ -9,7 +9,6 @@ export default function App() {
   const [tasks, setTasks] = useState([]);
 
   function onPressAddTask(taskToAdd) {
-    console.log(taskToAdd);
     let id = Math.random();
     let task = {
       "text": taskToAdd,
@@ -19,11 +18,16 @@ export default function App() {
     setTasks([...tasks, task])
   }
 
+  function deleteTask(key) {
+    let newTasks = tasks.filter(task => task.key != key);
+    setTasks(newTasks);
+  }
+
   return (
     <View style={styles.container}>
       <AddTask onPress={onPressAddTask} />
 
-      <TaskLists tasks={tasks} />
+      <TaskLists tasks={tasks} onPress={deleteTask} />
 
       <StatusBar style="auto" />
     </View>
